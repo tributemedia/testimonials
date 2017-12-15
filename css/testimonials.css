@@ -1,0 +1,26 @@
+#block-views-tribute-testimonials-block-2 {
+  overflow: hidden;
+}
+
+.testimonial__title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.testimonial__info {
+  border-left: 2px solid #eeeeee;
+  padding-left: 10px;
+}
+
+.testimonial__body {
+  font-size: 18px;
+}
+
+.testimonial__business-title {
+  float: left;
+  color: #666666;
+}
+
+.testimonial__business-name {
+  color: #666666;
+}

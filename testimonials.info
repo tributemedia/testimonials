@@ -1,0 +1,30 @@
+name = Testimonials
+description = Provides the Testimonials content type, sample content, and view with page, standard block, and rotating block displays.
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = jcarousel
+dependencies[] = text
+dependencies[] = tm_content_types
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = views-tribute_testimonials-block_1
+features[fe_block_settings][] = views-tribute_testimonials-block_2
+features[features_api][] = api:2
+features[field_base][] = field_business_name
+features[field_base][] = field_business_title
+features[field_base][] = field_snippet
+features[field_instance][] = node-testimonials-body
+features[field_instance][] = node-testimonials-field_business_name
+features[field_instance][] = node-testimonials-field_business_title
+features[field_instance][] = node-testimonials-field_snippet
+features[node][] = testimonials
+features[uuid_node][] = 94c06394-4d2e-49ec-85cf-96bbea9dddd1
+features[uuid_node][] = b4838157-fa20-4115-aad2-a3c6aa2ca178
+features[views_view][] = tribute_testimonials
+features_exclude[dependencies][ctools] = ctools
+features_exclude[dependencies][features] = features
+
+; Stylesheets
+stylesheets[all][] = css/testimonials.css
