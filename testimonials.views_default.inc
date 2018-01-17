@@ -179,7 +179,7 @@ border-color: #777;
 <div class="testimonial__info">
   <div class="testimonial__title">[title]</div>
   <div class="testimonial__business-title">[field_business_title]</div>
-  <div class="testimonial__business-name">[field_business_name]</div>
+  <div class="testimonial__business-name">&nbsp; [field_business_name]</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['path'] = 'testimonials';
@@ -248,7 +248,7 @@ border-color: #777;
 <div class="testimonial__info">
   <div class="testimonial__title">[title]</div>
   <div class="testimonial__business-title">[field_business_title]</div>
-  <div class="testimonial__business-name">[field_business_name]</div>
+  <div class="testimonial__business-name">&nbsp; [field_business_name]</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
