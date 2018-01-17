@@ -19,7 +19,7 @@ function testimonials_default_fe_block_settings() {
     'module' => 'views',
     'node_types' => array(),
     'options' => NULL,
-    'pages' => '',
+    'pages' => 'testimonials',
     'roles' => array(),
     'themes' => array(
       'material_custom' => array(
@@ -46,7 +46,7 @@ function testimonials_default_fe_block_settings() {
     'module' => 'views',
     'node_types' => array(),
     'options' => 'a:0:{}',
-    'pages' => '<front>',
+    'pages' => 'testimonials',
     'roles' => array(),
     'themes' => array(
       'material_custom' => array(
