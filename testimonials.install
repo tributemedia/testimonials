@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file testimonials.install
+ */
+
+/**
+ * Implements hook_install().
+ */
+
+function testimonials_install() {
+  variable_set('pathauto_node_testimonial_pattern', 'testimonials/[node:title]');
+}
