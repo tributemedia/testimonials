@@ -1,0 +1,159 @@
+/** page view **/
+.testimonial-height .views_slideshow_slide {
+  width:100%;
+}
+
+.testimonial-height {
+  height:300px;
+}
+
+.path-testimonials #block-narwhal-content .views-row {
+    border-bottom: 1px solid #ccc;
+
+}
+.path-testimonials #block-narwhal-content .views-row:last-child {
+  border-bottom:none;
+}
+
+/** full-width blocks **/
+
+/** classes to use on blocks:
+
+full-width - allows for the block to be considered full-width in any region
+testimonial - allows the block to be recognized as a testimonial block
+slideshow - allows the block to be recognized as a slideshow
+align-center - allows for the block to have text inside aligned centered (default is align left)
+no-image - removes the image from the view (visual removal only to simplify views)
+
+**/
+.full-width.testimonial h2,
+.testimonials-wrapper-wrapper.full-width,
+.testimonials-read-more {
+  max-width:800px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.full-width.testimonial {
+  height:450px;
+
+}
+
+.full-width.testimonial > .inner {
+  position:absolute;
+  top:50%;
+  transform:translate(0, -50%);
+  width:100%;
+  padding-left:20px;
+  padding-right:20px;
+}
+.full-width.testimonial.slideshow > .inner {
+  position:relative;
+  transform:unset;
+  height:200px;
+  top:100px;
+  transform:none;
+}
+
+.testimonial.align-center h2,
+.align-center .testimonials-read-more  {
+  text-align:center;
+}
+.align-center .testimonial-img-wrapper {
+  float:none;
+  margin:auto;
+  
+}
+.align-center .testimonial-wrapper {
+  text-align:center;
+}
+
+.align-center .testimonial-wrapper.with-image {
+  margin-left:0;
+}
+
+/** slideshow **/
+.full-width.testimonial .views_slideshow_slide {
+  width:100%;
+}
+
+/** no image **/
+
+.no-image .testimonial-img-wrapper{
+  display:none;
+}
+.no-image .testimonial-wrapper.with-image {
+  margin-left:0;
+}
+
+
+
+/** all views **/
+
+
+.testimonial-img-wrapper {
+    float:left;
+    width:125px;
+    margin:0 0 10px;
+}
+.testimonials-wrapper-wrapper .testimonial-img-wrapper img {
+  border-radius:100px;
+  background-clip: padding-box;
+}
+.testimonial-wrapper.with-image {
+    margin-left:145px;
+}
+
+.testimonial-summary-wrapper {
+    position:relative;
+    font-style:italic;
+    margin-bottom:10px;
+}
+.testimonial-wrapper {
+  font-style:italic;
+}
+.testimonial-wrapper .attribution-section {
+  font-style:normal;
+  margin-top:10px;
+}
+.testimonials-wrapper-wrapper .customer-name {
+    font-weight:bold;
+}
+.testimonials-wrapper-wrapper .company-wrapper {
+  opacity: .7;
+  font-size:.9rem;
+}
+.testimonials-read-more {
+  display:block;
+}
+.testimonials-read-more.testimonials-item {
+  padding:20px 0 0;
+}
+.testimonials-read-more.testimonials-all {
+  padding:0 0 20px;
+}
+/** sidebar **/
+.sidebar .testimonial-img-wrapper{
+  float:none;
+}
+.sidebar .testimonial-wrapper.with-image {
+  margin-left:0;
+}
+
+@media (max-width:767px){
+
+  .full-width.testimonial .testimonial-img-wrapper {
+    float:none;
+    margin:auto;
+  
+  }
+  .full-width.testimonial .testimonial-wrapper,
+  .full-width.testimonial h2,
+  .full-width.testimonial .testimonials-read-more {
+    text-align:center;
+  }
+
+  .full-width.testimonial .testimonial-wrapper.with-image {
+    margin-left:0;
+  }
+}

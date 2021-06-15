@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: testimonial_image
+label: 'Testimonial Image'
+effects:
+  4def7be9-2f51-4d01-ad9e-dfbadb616d26:
+    uuid: 4def7be9-2f51-4d01-ad9e-dfbadb616d26
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 150
+      height: 150
+      anchor: center-center

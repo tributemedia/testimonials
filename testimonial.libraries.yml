@@ -1,0 +1,4 @@
+testimonial-view:
+  css:
+    theme:
+      css/testimonial_views.css: {}

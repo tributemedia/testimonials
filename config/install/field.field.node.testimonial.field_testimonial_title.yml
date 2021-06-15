@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_testimonial_title
+    - node.type.testimonial
+id: node.testimonial.field_testimonial_title
+field_name: field_testimonial_title
+entity_type: node
+bundle: testimonial
+label: Title
+description: 'Enter the professional title of the person offering the testimonial.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

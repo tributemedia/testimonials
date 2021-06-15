@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Testimonial
+type: testimonial
+description: 'Use this content type to create new testimonials. They will automatically appear in their appropriate locations throughout your website.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false
