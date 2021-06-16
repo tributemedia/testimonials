@@ -1,7 +1,7 @@
 # Testimonials
 The Testimonials module provides the Testimonials content type, sample content, and view with page, standard block, and rotating block displays.
 
-## Installation
+## Installation and Configuration
 Link to additional documentation [here](https://docs.google.com/document/d/1JlB25RPxkVDUGS8ogLjT-z7Pe8eTcDIVlV_PQh5kYXU/edit#).
 1. Open the Pantheon dashboard to the development environment for the site.
 2. Make sure the environment is in SFTP mode and connect to the environment in your SFTP client of choice.
