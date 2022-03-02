@@ -1,0 +1,12 @@
+{
+    "name": "tributemedia/testimonials",
+    "description": "Provides the Testimonials content type, sample content, and view with page, standard block, and rotating block displays.",
+    "type": "drupal-module",
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Tributemedia\\Testimonials\\": "src/"
+        }
+    },
+    "require": {}
+}
