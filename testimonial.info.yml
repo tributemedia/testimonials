@@ -14,11 +14,11 @@ dependencies:
   - menu_ui
   - node
   - path
+  - slick
+  - slick_views
   - svg_image
   - system
   - text
   - user
   - views
-  - views_slideshow
-  - views_slideshow_cycle
 version: 2.1.0-alpha
