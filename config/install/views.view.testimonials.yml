@@ -673,7 +673,18 @@ display:
           plugin_id: standard
       title: Testimonials
       header: {  }
-      footer: {  }
+      footer:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: 'More Link'
+          empty: false
+          tokenize: false
+          content: '<a class="button" href="/testimonials">More Testimonials</a>'
+          plugin_id: text_custom
       empty: {  }
       relationships: {  }
       arguments: {  }
@@ -717,6 +728,12 @@ display:
         filters: false
         filter_groups: false
         cache: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        link_display: false
+        link_url: false
+        footer: true
       display_description: ''
       sorts:
         random:
@@ -1180,59 +1197,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: '<a href="{{ view_node }}" class="emphasized testimonials-read-more testimonials-item">Read More</a>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: view
-          output_url_as_text: true
-          absolute: false
-          entity_type: node
-          plugin_id: entity_link
       filters:
         status:
           value: '1'
@@ -1266,6 +1230,11 @@ display:
       cache:
         type: none
         options: {  }
+      use_more: false
+      use_more_always: true
+      use_more_text: 'View All'
+      link_display: testimonials_page
+      link_url: ''
     cache_metadata:
       max-age: 0
       contexts:
@@ -3109,6 +3078,7 @@ display:
         use_more: false
         use_more_always: false
         use_more_text: false
+        footer: false
       pager:
         type: full
         options:
@@ -3582,59 +3552,7 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: '<a href="{{ view_node }}" class="emphasized">Read More</a>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'Read More'
-          output_url_as_text: true
-          absolute: false
-          entity_type: node
-          plugin_id: entity_link
+      footer: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -3650,4 +3568,3 @@ display:
         - 'config:field.storage.node.field_testimonial_image'
         - 'config:field.storage.node.field_testimonial_state'
         - 'config:field.storage.node.field_testimonial_title'
-
