@@ -1,0 +1,86 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: k-uVsotULE_kbsfbbDtLeQSfvR0Mz1K4_T-UmT5d8Ec
+id: slide_show
+name: slide_show
+weight: 0
+label: 'Slide Show'
+group: ''
+skin: ''
+breakpoints: 4
+optimized: true
+options:
+  options__active_tab: edit-options-responsives
+  settings:
+    mobileFirst: true
+    autoplay: true
+    pauseOnFocus: false
+    arrows: false
+    draggable: false
+    lazyLoad: blazy
+    rows: 0
+    slidesToShow: 1
+    swipe: false
+    touchMove: false
+    cssEase: ease-in-out
+  responsives:
+    responsive:
+      -
+        breakpoint: 1200
+        unslick: false
+        settings:
+          autoplay: true
+          autoplaySpeed: 4000
+          pauseOnFocus: false
+          arrows: false
+          draggable: false
+          rows: 0
+          speed: 4000
+          swipe: false
+          touchMove: false
+          waitForAnimate: false
+      -
+        breakpoint: 992
+        unslick: false
+        settings:
+          autoplay: true
+          autoplaySpeed: 4000
+          pauseOnFocus: false
+          arrows: false
+          draggable: false
+          rows: 0
+          speed: 4000
+          swipe: false
+          touchMove: false
+          waitForAnimate: false
+      -
+        breakpoint: 768
+        unslick: false
+        settings:
+          autoplay: true
+          autoplaySpeed: 4000
+          pauseOnFocus: false
+          arrows: false
+          draggable: false
+          rows: 0
+          speed: 4000
+          swipe: false
+          touchMove: false
+          waitForAnimate: false
+      -
+        breakpoint: 200
+        unslick: false
+        settings:
+          autoplay: true
+          autoplaySpeed: 4000
+          pauseOnFocus: false
+          arrows: false
+          draggable: false
+          rows: 0
+          speed: 4000
+          swipe: false
+          touchMove: false
+          waitForAnimate: false
+
