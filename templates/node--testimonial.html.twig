@@ -93,6 +93,7 @@
       </div> <!-- .company-wrapper -->
       {% endif %}
     </div> <!-- .attribution-section -->
+    {{ content.field_testimonial_num_stars|render }}
   </div> <!-- .testimonial-wrapper.with-image -->
   
   {% else %} {# if no image #}
@@ -119,8 +120,9 @@
       </div> <!-- .company-wrapper -->
       {% endif %}
     </div> <!-- .attribution-section -->
+
+    {{ content.field_testimonial_num_stars|render }}
   </div> <!-- .testimonial-wrapper --> 
   {% endif %} {# no image #}
 
 </div> <!-- .testimonials-wrapper-wrapper -->
-
