@@ -62,5 +62,12 @@ function testimonial_preprocess_views_view_fields(&$variables) {
 
     }
 
+    if(!empty($variables['fields']['field_testimonial_image']) && 
+    strpos($variables['fields']['field_testimonial_image']->content, 'img') !== FALSE) {
+
+      $variables['image_set'] = TRUE;
+
+    }
+
   }
 }
