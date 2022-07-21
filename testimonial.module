@@ -49,7 +49,7 @@ function testimonial_preprocess_views_view_fields(&$variables) {
   if($variables['view']->id() == 'testimonials') {
 
     $fields = $variables['fields'];
-    $variables['view_node_link'] = $variables['row']->_entity->toUrl()->toString();
+    $variables['view_node_link'] = $fields['view_node']->content;
 
     foreach($fields as $fieldName => $field) {
 
