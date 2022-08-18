@@ -8,9 +8,11 @@ dependencies:
     - field.storage.node.field_testimonial_image
     - field.storage.node.field_testimonial_state
     - field.storage.node.field_testimonial_title
+    - field.storage.node.field_website_link
     - image.style.testimonial_image
     - node.type.testimonial
   module:
+    - link
     - node
     - slick_views
     - svg_image
@@ -682,18 +684,7 @@ display:
       link_display: page_1
       link_url: ''
       header: {  }
-      footer:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: 'More Link'
-          plugin_id: text_custom
-          empty: false
-          content: '<a class="button" href="/testimonials">More Testimonials</a>'
-          tokenize: false
+      footer: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -717,6 +708,73 @@ display:
     position: 2
     display_options:
       fields:
+        field_website_link:
+          id: field_website_link
+          table: node__field_website_link
+          field: field_website_link
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: uri
+          type: link
+          settings:
+            trim_length: 80
+            url_only: true
+            url_plain: true
+            rel: '0'
+            target: '0'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -832,9 +890,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: text_summary_or_trimmed
-          settings:
-            trim_length: 150
+          type: text_default
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -921,8 +978,8 @@ display:
           alter:
             alter_text: false
             text: ''
-            make_link: false
-            path: ''
+            make_link: true
+            path: '{{ field_website_link }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -1165,6 +1222,55 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n    {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  \r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> {% endif %}\r\n\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       pager:
         type: some
         options:
@@ -1251,6 +1357,7 @@ display:
         - 'config:field.storage.node.field_testimonial_image'
         - 'config:field.storage.node.field_testimonial_state'
         - 'config:field.storage.node.field_testimonial_title'
+        - 'config:field.storage.node.field_website_link'
   fw_slide_block:
     id: fw_slide_block
     display_title: 'FW Block (slideshow)'
@@ -1373,9 +1480,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: text_summary_or_trimmed
-          settings:
-            trim_length: 150
+          type: text_default
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1587,7 +1693,7 @@ display:
           exclude: false
           alter:
             alter_text: false
-            text: ''
+            text: '<img src="{{ field_testimonial_image }}">'
             make_link: false
             path: ''
             absolute: false
@@ -1628,11 +1734,11 @@ display:
           type: image
           settings:
             image_link: ''
-            image_style: testimonial_image
+            image_style: ''
             svg_attributes:
               width: null
               height: null
-            svg_render_as_image: true
+            svg_render_as_image: false
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -1706,20 +1812,19 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
+          plugin_id: custom
           label: ''
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_node }}" class="emphasized testimonials-read-more testimonials-item">Read More</a>'
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n    {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  \r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> {% endif %}\r\n\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -1755,10 +1860,7 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: true
-          text: view
-          output_url_as_text: true
-          absolute: false
+          hide_alter_empty: false
       pager:
         type: some
         options:
@@ -1819,9 +1921,6 @@ display:
             field_testimonial_state: '0'
             field_testimonial_image: '0'
             field_testimonial_title: '0'
-            nothing: '0'
-            view_node: '0'
-            nothing_1: '0'
           optionset: slide_show
           class: ''
           id: ''
@@ -1832,7 +1931,6 @@ display:
           vanilla: true
           layout: ''
           cache: 0
-          current_view_mode: block_4
           skin: default
           style: ''
           grid: ''
@@ -2393,6 +2491,55 @@ display:
           text: 'Read More'
           output_url_as_text: true
           absolute: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n    {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  \r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> {% endif %}\r\n\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       pager:
         type: some
         options:
@@ -2976,6 +3123,55 @@ display:
           text: 'Read More'
           output_url_as_text: true
           absolute: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n    {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  \r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> {% endif %}\r\n\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       pager:
         type: some
         options:
@@ -3019,12 +3215,12 @@ display:
           vanilla: true
           layout: ''
           cache: 0
-          current_view_mode: block_2
           skin: default
           style: ''
           grid: ''
           grid_medium: ''
           grid_small: ''
+          current_view_mode: block_2
           overridables:
             arrows: '0'
             autoplay: '0'
@@ -3075,6 +3271,73 @@ display:
     position: 1
     display_options:
       fields:
+        field_website_link:
+          id: field_website_link
+          table: node__field_website_link
+          field: field_website_link
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: uri
+          type: link
+          settings:
+            trim_length: 80
+            url_only: true
+            url_plain: true
+            rel: '0'
+            target: '0'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -3279,8 +3542,8 @@ display:
           alter:
             alter_text: false
             text: ''
-            make_link: false
-            path: ''
+            make_link: true
+            path: '{{ field_website_link }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -3523,20 +3786,19 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
+          plugin_id: custom
           label: ''
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_node }}" class="emphasized">Read More</a>'
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n    {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  \r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span> | <span class=\"position-title\">{{ field_testimonial_title }}</span> \r\n      </div> <!-- .author-wrapper -->\r\n      <div class=\"company-wrapper\">\r\n      <span class=\"company-name\">{{ field_testimonial_company_name }}</span> |\r\n    {% if field_testimonial_city or field_testimonial_state %}\r\n      <span class=\"city-state-wrapper\">\r\n        {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %}, {% endif %}{{ field_testimonial_state }}\r\n      </span>{% endif %}\r\n    </div> <!-- .company-wrapper -->\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> {% endif %}\r\n\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -3572,10 +3834,7 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: true
-          text: 'Read More'
-          output_url_as_text: true
-          absolute: false
+          hide_alter_empty: false
       pager:
         type: full
         options:
@@ -3626,3 +3885,4 @@ display:
         - 'config:field.storage.node.field_testimonial_image'
         - 'config:field.storage.node.field_testimonial_state'
         - 'config:field.storage.node.field_testimonial_title'
+        - 'config:field.storage.node.field_website_link'
