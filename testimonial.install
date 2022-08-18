@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\views\Views;
+use Drupal\views\ViewExecutable;
+
+/*
+*****************************
+*** UPDATES *****************
+*****************************
+*/
+
+/**
+ * Adds custom text field back in for v2.2.0
+ */
+function testimonial_update_9222() {
+
+    $view = Views::getView('testimonials');
+    $displays = [
+      'testimonials_page',
+      'fw_refresh_block',
+      'fw_slide_block',
+      'sb_block_ref_block',
+      'sb_slide_block'
+    ];
+    $customText = $view->getHandler('default', 'field', 'nothing');
+
+    foreach($displays as $display) {
+      if(!array_key_exists('nothing', $view->getHandlers('field', $display))) {
+        $view->setHandler($display, 'field', 'nothing', $customText);
+      }
+    }
+    $view->save();
+}
