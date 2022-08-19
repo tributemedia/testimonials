@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.body
-    - field.storage.node.field_testimonial_city
     - field.storage.node.field_testimonial_company_name
     - field.storage.node.field_testimonial_image
     - field.storage.node.field_testimonial_state
@@ -12,12 +11,12 @@ dependencies:
     - node.type.testimonial
   module:
     - node
-    - slick_views
     - svg_image
     - text
     - user
+    - views_slideshow
 _core:
-  default_config_hash: RCCG0YqkFPk5MgRE6jieVsKg9qFFgqGZkfGA7rzxoXg
+  default_config_hash: Le7tLfzvVZ2gWYSNVhjqXYV46dGh6oj8gaLrNYrLmQ4
 id: testimonials
 label: Testimonials
 module: views
@@ -27,12 +26,58 @@ base_table: node_field_data
 base_field: nid
 display:
   default:
+    display_plugin: default
     id: default
     display_title: Master
-    display_plugin: default
     position: 0
     display_options:
-      title: Testimonials
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      query:
+        type: views_query
+        options:
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_comment: ''
+          query_tags: {  }
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        type: mini
+        options:
+          items_per_page: 10
+          offset: 0
+          id: 0
+          total_pages: null
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          tags:
+            previous: ‹‹
+            next: ››
+      style:
+        type: default
+      row:
+        type: fields
       fields:
         title:
           id: title
@@ -41,9 +86,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -99,6 +141,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
         body:
           id: body
           table: node__body
@@ -106,7 +151,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -162,6 +206,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_city:
           id: field_testimonial_city
           table: node__field_testimonial_city
@@ -169,7 +214,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -225,6 +269,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_company_name:
           id: field_testimonial_company_name
           table: node__field_testimonial_company_name
@@ -232,7 +277,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -288,6 +332,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_state:
           id: field_testimonial_state
           table: node__field_testimonial_state
@@ -295,7 +340,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -351,6 +395,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_image:
           id: field_testimonial_image
           table: node__field_testimonial_image
@@ -358,7 +403,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -403,12 +447,14 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_link: ''
             image_style: testimonial_image
+            image_link: ''
+            svg_render_as_image: 1
             svg_attributes:
-              width: null
-              height: null
-            svg_render_as_image: true
+              width: ''
+              height: ''
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -419,6 +465,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_title:
           id: field_testimonial_title
           table: node__field_testimonial_title
@@ -426,7 +473,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -482,6 +528,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         nothing:
           id: nothing
           table: views
@@ -489,7 +536,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: custom
           label: ''
           exclude: false
           alter:
@@ -531,6 +577,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
+          plugin_id: custom
         view_node:
           id: view_node
           table: node
@@ -538,8 +585,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
           label: ''
           exclude: false
           alter:
@@ -584,42 +629,34 @@ display:
           text: 'Read More'
           output_url_as_text: true
           absolute: false
-      pager:
-        type: mini
-        options:
-          offset: 0
-          items_per_page: 10
-          total_pages: null
-          id: 0
-          tags:
-            next: ››
-            previous: ‹‹
+          entity_type: node
+          plugin_id: entity_link
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
           expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      access:
-        type: perm
-        options:
-          perm: 'access content'
-      cache:
-        type: tag
-        options: {  }
-      empty: {  }
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          value:
+            testimonial: testimonial
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
       sorts:
         title:
           id: title
@@ -628,73 +665,26 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: standard
           order: DESC
+          exposed: false
           expose:
             label: ''
             field_identifier: title
-          exposed: false
-      arguments: {  }
-      filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
           entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          value:
-            testimonial: testimonial
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-      style:
-        type: default
-      row:
-        type: fields
-      query:
-        type: views_query
-        options:
-          query_comment: ''
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_tags: {  }
+          entity_field: title
+          plugin_id: standard
+      title: Testimonials
+      header: {  }
+      footer: {  }
+      empty: {  }
       relationships: {  }
+      arguments: {  }
+      display_extenders: {  }
       use_more: false
       use_more_always: true
       use_more_text: 'View All'
-      link_display: page_1
       link_url: ''
-      header: {  }
-      footer:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: 'More Link'
-          plugin_id: text_custom
-          empty: false
-          content: '<a class="button" href="/testimonials">More Testimonials</a>'
-          tokenize: false
-      display_extenders: {  }
+      link_display: page_1
     cache_metadata:
       max-age: -1
       contexts:
@@ -710,12 +700,73 @@ display:
         - 'config:field.storage.node.field_testimonial_image'
         - 'config:field.storage.node.field_testimonial_state'
         - 'config:field.storage.node.field_testimonial_title'
-  fw_refresh_block:
-    id: fw_refresh_block
-    display_title: 'FW Block (rotate on refresh)'
+  block_1:
     display_plugin: block
+    id: block_1
+    display_title: 'SB Block (rotate on refresh)'
     position: 2
     display_options:
+      display_extenders: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 1
+          offset: 0
+      defaults:
+        pager: false
+        sorts: false
+        cache: false
+        filters: false
+        filter_groups: false
+        fields: false
+      display_description: ''
+      sorts:
+        random:
+          id: random
+          table: views
+          field: random
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+            field_identifier: random
+          plugin_id: random
+      cache:
+        type: none
+        options: {  }
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          value:
+            testimonial: testimonial
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       fields:
         title:
           id: title
@@ -724,11 +775,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -782,6 +830,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
         body:
           id: body
           table: node__body
@@ -789,9 +840,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -845,6 +895,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_city:
           id: field_testimonial_city
           table: node__field_testimonial_city
@@ -852,9 +903,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -908,6 +958,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_company_name:
           id: field_testimonial_company_name
           table: node__field_testimonial_company_name
@@ -915,9 +966,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -971,6 +1021,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_state:
           id: field_testimonial_state
           table: node__field_testimonial_state
@@ -978,9 +1029,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1034,6 +1084,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_image:
           id: field_testimonial_image
           table: node__field_testimonial_image
@@ -1041,9 +1092,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1086,12 +1136,14 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_link: ''
             image_style: testimonial_image
+            image_link: ''
+            svg_render_as_image: 1
             svg_attributes:
-              width: null
-              height: null
-            svg_render_as_image: true
+              width: ''
+              height: ''
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -1102,6 +1154,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_title:
           id: field_testimonial_title
           table: node__field_testimonial_title
@@ -1109,12 +1162,11 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
-            text: '&nbsp;|&nbsp;<span class="position-title">{{ field_testimonial_title }}</span> '
+            text: '&nbsp;|&nbsp;<span class="position-title">{{ field_testimonial_title }}</span>'
             make_link: false
             path: ''
             absolute: false
@@ -1148,7 +1200,7 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
-          hide_empty: true
+          hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
@@ -1165,78 +1217,158 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 1
-      cache:
-        type: none
-        options: {  }
-      sorts:
-        random:
-          id: random
+          plugin_id: field
+        nothing:
+          id: nothing
           table: views
-          field: random
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: random
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: random
-          exposed: false
-      filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      \r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n  {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> \r\n  {% endif %}\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="{{ view_node }}" class="emphasized">Read More</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: 'Read More'
+          output_url_as_text: true
+          absolute: false
           entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          value:
-            testimonial: testimonial
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        cache: false
-        pager: false
-        use_more: false
-        use_more_always: false
-        use_more_text: false
-        link_display: false
-        link_url: false
-        fields: false
-        sorts: false
-        filters: false
-        filter_groups: false
-        footer: true
-      display_description: ''
-      use_more: false
-      use_more_always: true
-      use_more_text: 'View All'
-      link_display: testimonials_page
-      link_url: ''
-      display_extenders: {  }
+          plugin_id: entity_link
+        nothing_1:
+          id: nothing_1
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="/testimonials" class="emphasized">All Testimonials</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
     cache_metadata:
       max-age: 0
       contexts:
@@ -1251,12 +1383,131 @@ display:
         - 'config:field.storage.node.field_testimonial_image'
         - 'config:field.storage.node.field_testimonial_state'
         - 'config:field.storage.node.field_testimonial_title'
-  fw_slide_block:
-    id: fw_slide_block
-    display_title: 'FW Block (slideshow)'
+  block_2:
     display_plugin: block
+    id: block_2
+    display_title: 'SB Block (slideshow)'
     position: 2
     display_options:
+      display_extenders: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 5
+          offset: 0
+      defaults:
+        pager: false
+        sorts: false
+        style: false
+        row: false
+        fields: false
+      display_description: ''
+      sorts:
+        random:
+          id: random
+          table: views
+          field: random
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+            field_identifier: random
+          plugin_id: random
+      style:
+        type: slideshow
+        options:
+          row_class: ''
+          default_row_class: true
+          slideshow_skin: default
+          slideshow_type: views_slideshow_cycle
+          views_slideshow_cycle:
+            effect: fade
+            transition_advanced: 1
+            timeout: '5000'
+            speed: '700'
+            delay: '0'
+            sync: 1
+            random: 0
+            pause: 1
+            pause_on_click: 0
+            action_advanced: 1
+            start_paused: 0
+            remember_slide: 0
+            remember_slide_days: '1'
+            pause_when_hidden: 0
+            pause_when_hidden_type: full
+            amount_allowed_visible: ''
+            nowrap: 0
+            fixed_height: 1
+            items_per_slide: '1'
+            items_per_slide_first: 0
+            items_per_slide_first_number: '1'
+            wait_for_image_load: 0
+            wait_for_image_load_timeout: '3000'
+            cleartype: 0
+            cleartypenobg: 0
+            advanced_options_choices: '0'
+            advanced_options_entry: ''
+            advanced_options: '{}'
+          widgets:
+            top:
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_pager:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_fields
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                    body: 0
+                    field_testimonial_city: 0
+                    field_testimonial_company_name: 0
+                    field_testimonial_state: 0
+                    field_testimonial_image: 0
+                    field_testimonial_title: 0
+                    nothing: 0
+                  views_slideshow_pager_fields_hover: 0
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
+            bottom:
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_pager:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_fields
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                    body: 0
+                    field_testimonial_city: 0
+                    field_testimonial_company_name: 0
+                    field_testimonial_state: 0
+                    field_testimonial_image: 0
+                    field_testimonial_title: 0
+                    nothing: 0
+                  views_slideshow_pager_fields_hover: 0
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
+      row:
+        type: fields
+        options: {  }
       fields:
         title:
           id: title
@@ -1265,11 +1516,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1323,6 +1571,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
         body:
           id: body
           table: node__body
@@ -1330,9 +1581,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1386,6 +1636,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_city:
           id: field_testimonial_city
           table: node__field_testimonial_city
@@ -1393,9 +1644,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1449,6 +1699,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_company_name:
           id: field_testimonial_company_name
           table: node__field_testimonial_company_name
@@ -1456,9 +1707,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1512,6 +1762,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_state:
           id: field_testimonial_state
           table: node__field_testimonial_state
@@ -1519,9 +1770,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1575,6 +1825,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_image:
           id: field_testimonial_image
           table: node__field_testimonial_image
@@ -1582,9 +1833,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1627,12 +1877,14 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_link: ''
             image_style: testimonial_image
+            image_link: ''
+            svg_render_as_image: 1
             svg_attributes:
-              width: null
-              height: null
-            svg_render_as_image: true
+              width: ''
+              height: ''
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -1643,6 +1895,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_title:
           id: field_testimonial_title
           table: node__field_testimonial_title
@@ -1650,9 +1903,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: '&nbsp;|&nbsp;<span class="position-title">{{ field_testimonial_title }}</span>'
@@ -1706,6 +1958,56 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      \r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n  {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> \r\n  {% endif %}\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
         view_node:
           id: view_node
           table: node
@@ -1713,8 +2015,656 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="{{ view_node }}" class="emphasized">Read More</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: 'Read More'
+          output_url_as_text: true
+          absolute: false
           entity_type: node
           plugin_id: entity_link
+        nothing_1:
+          id: nothing_1
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="/testimonials" class="emphasized">All Testimonials</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+    cache_metadata:
+      max-age: 0
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_testimonial_city'
+        - 'config:field.storage.node.field_testimonial_company_name'
+        - 'config:field.storage.node.field_testimonial_image'
+        - 'config:field.storage.node.field_testimonial_state'
+        - 'config:field.storage.node.field_testimonial_title'
+  block_3:
+    display_plugin: block
+    id: block_3
+    display_title: 'FW Block (rotate on refresh)'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 1
+          offset: 0
+      defaults:
+        pager: false
+        sorts: false
+        fields: false
+        filters: false
+        filter_groups: false
+        cache: false
+      display_description: ''
+      sorts:
+        random:
+          id: random
+          table: views
+          field: random
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+            field_identifier: random
+          plugin_id: random
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: false
+            ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+        body:
+          id: body
+          table: node__body
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_summary_or_trimmed
+          settings:
+            trim_length: 150
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_testimonial_city:
+          id: field_testimonial_city
+          table: node__field_testimonial_city
+          field: field_testimonial_city
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_testimonial_company_name:
+          id: field_testimonial_company_name
+          table: node__field_testimonial_company_name
+          field: field_testimonial_company_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_testimonial_state:
+          id: field_testimonial_state
+          table: node__field_testimonial_state
+          field: field_testimonial_state
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_testimonial_image:
+          id: field_testimonial_image
+          table: node__field_testimonial_image
+          field: field_testimonial_image
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image
+          settings:
+            image_style: testimonial_image
+            image_link: ''
+            svg_render_as_image: 1
+            svg_attributes:
+              width: ''
+              height: ''
+            image_loading:
+              attribute: lazy
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_testimonial_title:
+          id: field_testimonial_title
+          table: node__field_testimonial_title
+          field: field_testimonial_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '&nbsp;|&nbsp;<span class="position-title">{{ field_testimonial_title }}</span> '
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: true
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper full-width clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n    {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  \r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> {% endif %}\r\n\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
           label: ''
           exclude: false
           alter:
@@ -1759,48 +2709,80 @@ display:
           text: view
           output_url_as_text: true
           absolute: false
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 5
-      sorts:
-        random:
-          id: random
+          entity_type: node
+          plugin_id: entity_link
+        nothing_1:
+          id: nothing_1
           table: views
-          field: random
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: random
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: random
-          exposed: false
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="/testimonials" class="emphasized testimonials-read-more testimonials-all">All Testimonials</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
       filters:
         status:
-          id: status
+          value: '1'
           table: node_field_data
           field: status
+          plugin_id: boolean
           entity_type: node
           entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
+          id: status
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
+          group: 1
         type:
           id: type
           table: node_field_data
           field: type
+          value:
+            testimonial: testimonial
           entity_type: node
           entity_field: type
           plugin_id: bundle
-          value:
-            testimonial: testimonial
           expose:
             operator_limit_selection: false
             operator_list: {  }
@@ -1808,652 +2790,9 @@ display:
         operator: AND
         groups:
           1: AND
-      style:
-        type: slick
-        options:
-          caption:
-            title: '0'
-            body: '0'
-            field_testimonial_city: '0'
-            field_testimonial_company_name: '0'
-            field_testimonial_state: '0'
-            field_testimonial_image: '0'
-            field_testimonial_title: '0'
-            nothing: '0'
-            view_node: '0'
-            nothing_1: '0'
-          optionset: slide_show
-          class: ''
-          id: ''
-          image: ''
-          link: ''
-          overlay: ''
-          title: ''
-          vanilla: true
-          layout: ''
-          cache: 0
-          current_view_mode: block_4
-          skin: default
-          style: ''
-          grid: ''
-          grid_medium: ''
-          grid_small: ''
-          overridables:
-            arrows: '0'
-            autoplay: '0'
-            dots: '0'
-            draggable: '0'
-            infinite: '0'
-            mouseWheel: '0'
-            randomize: '0'
-            variableWidth: '0'
-          thumbnail: ''
-          optionset_thumbnail: ''
-          skin_thumbnail: ''
-          thumbnail_caption: ''
-          thumbnail_effect: ''
-          thumbnail_position: ''
-          override: true
-          preserve_keys: false
-          visible_items: null
-      row:
-        type: fields
-        options: {  }
-      defaults:
-        css_class: false
-        pager: false
-        style: false
-        row: false
-        fields: false
-        sorts: false
-        filters: false
-        filter_groups: false
-      css_class: fw-rotating-testimonial
-      display_description: ''
-      display_extenders: {  }
-    cache_metadata:
-      max-age: 0
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_testimonial_city'
-        - 'config:field.storage.node.field_testimonial_company_name'
-        - 'config:field.storage.node.field_testimonial_image'
-        - 'config:field.storage.node.field_testimonial_state'
-        - 'config:field.storage.node.field_testimonial_title'
-  sb_block_ref_block:
-    id: sb_block_ref_block
-    display_title: 'SB Block (rotate on refresh)'
-    display_plugin: block
-    position: 2
-    display_options:
-      fields:
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        body:
-          id: body
-          table: node__body
-          field: body
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: text_summary_or_trimmed
-          settings:
-            trim_length: 150
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_testimonial_city:
-          id: field_testimonial_city
-          table: node__field_testimonial_city
-          field: field_testimonial_city
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_testimonial_company_name:
-          id: field_testimonial_company_name
-          table: node__field_testimonial_company_name
-          field: field_testimonial_company_name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_testimonial_state:
-          id: field_testimonial_state
-          table: node__field_testimonial_state
-          field: field_testimonial_state
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_testimonial_image:
-          id: field_testimonial_image
-          table: node__field_testimonial_image
-          field: field_testimonial_image
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: image
-          settings:
-            image_link: ''
-            image_style: testimonial_image
-            svg_attributes:
-              width: null
-              height: null
-            svg_render_as_image: true
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_testimonial_title:
-          id: field_testimonial_title
-          table: node__field_testimonial_title
-          field: field_testimonial_title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: '&nbsp;|&nbsp;<span class="position-title">{{ field_testimonial_title }}</span>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: '<a href="{{ view_node }}" class="emphasized">Read More</a>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'Read More'
-          output_url_as_text: true
-          absolute: false
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 1
       cache:
         type: none
         options: {  }
-      sorts:
-        random:
-          id: random
-          table: views
-          field: random
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: random
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: random
-          exposed: false
-      filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          value:
-            testimonial: testimonial
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        cache: false
-        pager: false
-        fields: false
-        sorts: false
-        filters: false
-        filter_groups: false
-      display_description: ''
-      display_extenders: {  }
     cache_metadata:
       max-age: 0
       contexts:
@@ -2468,12 +2807,136 @@ display:
         - 'config:field.storage.node.field_testimonial_image'
         - 'config:field.storage.node.field_testimonial_state'
         - 'config:field.storage.node.field_testimonial_title'
-  sb_slide_block:
-    id: sb_slide_block
-    display_title: 'SB Block (slideshow)'
+  block_4:
     display_plugin: block
+    id: block_4
+    display_title: 'FW Block (slideshow)'
     position: 2
     display_options:
+      display_extenders: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 5
+          offset: 0
+      defaults:
+        pager: false
+        sorts: false
+        style: false
+        row: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      sorts:
+        random:
+          id: random
+          table: views
+          field: random
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+            field_identifier: random
+          plugin_id: random
+      style:
+        type: slideshow
+        options:
+          row_class: ''
+          default_row_class: true
+          slideshow_skin: default
+          slideshow_type: views_slideshow_cycle
+          views_slideshow_cycle:
+            effect: fade
+            transition_advanced: 1
+            timeout: '5000'
+            speed: '700'
+            delay: '0'
+            sync: 1
+            random: 0
+            pause: 1
+            pause_on_click: 0
+            action_advanced: 1
+            start_paused: 0
+            remember_slide: 0
+            remember_slide_days: '1'
+            pause_in_middle: 0
+            pause_when_hidden: 0
+            pause_when_hidden_type: full
+            amount_allowed_visible: ''
+            nowrap: 0
+            fixed_height: 1
+            items_per_slide: '1'
+            items_per_slide_first: 0
+            items_per_slide_first_number: '1'
+            wait_for_image_load: 0
+            wait_for_image_load_timeout: '3000'
+            cleartype: 0
+            cleartypenobg: 0
+            advanced_options_choices: '0'
+            advanced_options_entry: ''
+            advanced_options: '{}'
+          widgets:
+            top:
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_pager:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_fields
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                    body: 0
+                    field_testimonial_city: 0
+                    field_testimonial_company_name: 0
+                    field_testimonial_state: 0
+                    field_testimonial_image: 0
+                    field_testimonial_title: 0
+                    nothing: 0
+                    nothing_1: 0
+                  views_slideshow_pager_fields_hover: 0
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
+            bottom:
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_pager:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_fields
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                    body: 0
+                    field_testimonial_city: 0
+                    field_testimonial_company_name: 0
+                    field_testimonial_state: 0
+                    field_testimonial_image: 0
+                    field_testimonial_title: 0
+                    nothing: 0
+                    nothing_1: 0
+                  views_slideshow_pager_fields_hover: 0
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
+      row:
+        type: fields
+        options: {  }
       fields:
         title:
           id: title
@@ -2482,11 +2945,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -2540,6 +3000,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
         body:
           id: body
           table: node__body
@@ -2547,9 +3010,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -2603,6 +3065,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_city:
           id: field_testimonial_city
           table: node__field_testimonial_city
@@ -2610,9 +3073,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -2666,6 +3128,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_company_name:
           id: field_testimonial_company_name
           table: node__field_testimonial_company_name
@@ -2673,9 +3136,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -2729,6 +3191,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_state:
           id: field_testimonial_state
           table: node__field_testimonial_state
@@ -2736,9 +3199,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -2792,6 +3254,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_image:
           id: field_testimonial_image
           table: node__field_testimonial_image
@@ -2799,9 +3262,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -2844,12 +3306,14 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_link: ''
             image_style: testimonial_image
+            image_link: ''
+            svg_render_as_image: 1
             svg_attributes:
-              width: null
-              height: null
-            svg_render_as_image: true
+              width: ''
+              height: ''
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -2860,6 +3324,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_title:
           id: field_testimonial_title
           table: node__field_testimonial_title
@@ -2867,9 +3332,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: '&nbsp;|&nbsp;<span class="position-title">{{ field_testimonial_title }}</span>'
@@ -2923,6 +3387,56 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper full-width clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n    {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  \r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> {% endif %}\r\n\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
         view_node:
           id: view_node
           table: node
@@ -2930,13 +3444,11 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
           label: ''
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_node }}" class="emphasized">Read More</a>'
+            text: '<a href="{{ view_node }}" class="emphasized testimonials-read-more testimonials-item">Read More</a>'
             make_link: false
             path: ''
             absolute: false
@@ -2973,87 +3485,90 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: 'Read More'
+          text: view
           output_url_as_text: true
           absolute: false
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 5
-      sorts:
-        random:
-          id: random
+          entity_type: node
+          plugin_id: entity_link
+        nothing_1:
+          id: nothing_1
           table: views
-          field: random
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: random
-          order: ASC
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="/testimonials" class="emphasized testimonials-read-more testimonials-all">All Testimonials</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
           expose:
-            label: ''
-            field_identifier: random
-          exposed: false
-      style:
-        type: slick
-        options:
-          caption:
-            title: '0'
-            body: '0'
-            field_testimonial_city: '0'
-            field_testimonial_company_name: '0'
-            field_testimonial_state: '0'
-            field_testimonial_image: '0'
-            field_testimonial_title: '0'
-            nothing: '0'
-            view_node: '0'
-            nothing_1: '0'
-          optionset: sb_slide_show
-          class: ''
-          id: ''
-          image: ''
-          link: ''
-          overlay: ''
-          title: ''
-          vanilla: true
-          layout: ''
-          cache: 0
-          current_view_mode: block_2
-          skin: default
-          style: ''
-          grid: ''
-          grid_medium: ''
-          grid_small: ''
-          overridables:
-            arrows: '0'
-            autoplay: '0'
-            dots: '0'
-            draggable: '0'
-            infinite: '0'
-            mouseWheel: '0'
-            randomize: '0'
-            variableWidth: '0'
-          thumbnail: ''
-          optionset_thumbnail: ''
-          skin_thumbnail: ''
-          thumbnail_caption: ''
-          thumbnail_effect: ''
-          thumbnail_position: ''
-          override: false
-          preserve_keys: false
-          visible_items: null
-      row:
-        type: fields
-        options: {  }
-      defaults:
-        pager: false
-        style: false
-        row: false
-        fields: false
-        sorts: false
-      display_description: ''
-      display_extenders: {  }
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          value:
+            testimonial: testimonial
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: 0
       contexts:
@@ -3068,12 +3583,45 @@ display:
         - 'config:field.storage.node.field_testimonial_image'
         - 'config:field.storage.node.field_testimonial_state'
         - 'config:field.storage.node.field_testimonial_title'
-  testimonials_page:
-    id: testimonials_page
-    display_title: 'Testimonials Page'
+  page_1:
     display_plugin: page
+    id: page_1
+    display_title: 'Testimonials Page'
     position: 1
     display_options:
+      display_extenders: {  }
+      path: testimonials
+      display_description: ''
+      defaults:
+        fields: false
+        pager: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+      pager:
+        type: full
+        options:
+          items_per_page: 10
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      use_more: false
+      use_more_always: true
+      use_more_text: 'View All'
       fields:
         title:
           id: title
@@ -3082,11 +3630,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3140,6 +3685,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
         body:
           id: body
           table: node__body
@@ -3147,9 +3695,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3203,6 +3750,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_city:
           id: field_testimonial_city
           table: node__field_testimonial_city
@@ -3210,9 +3758,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3266,6 +3813,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_company_name:
           id: field_testimonial_company_name
           table: node__field_testimonial_company_name
@@ -3273,9 +3821,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3329,6 +3876,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_state:
           id: field_testimonial_state
           table: node__field_testimonial_state
@@ -3336,9 +3884,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3392,6 +3939,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_image:
           id: field_testimonial_image
           table: node__field_testimonial_image
@@ -3399,9 +3947,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3444,12 +3991,14 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_link: ''
             image_style: testimonial_image
+            image_link: ''
+            svg_render_as_image: 1
             svg_attributes:
-              width: null
-              height: null
-            svg_render_as_image: true
+              width: ''
+              height: ''
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -3460,6 +4009,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_testimonial_title:
           id: field_testimonial_title
           table: node__field_testimonial_title
@@ -3467,9 +4017,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: '&nbsp;|&nbsp;<span class="position-title">{{ field_testimonial_title }}</span> '
@@ -3523,6 +4072,56 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"testimonials-wrapper-wrapper clearfix\">\r\n  \r\n  {% if field_testimonial_image %}\r\n  <div class=\"testimonial-img-wrapper\">\r\n    {{ field_testimonial_image }}\r\n  </div> <!-- .testimonial-img-wrapper -->\r\n  \r\n  <div class=\"testimonial-wrapper with-image\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      \r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper.with-image -->\r\n  {% endif %} \r\n  \r\n  {% if not field_testimonial_image %}\r\n  <div class=\"testimonial-wrapper\">\r\n    {{ body }}\r\n    <div class=\"attribution-section\">\r\n      <div class=\"author-wrapper\">\r\n        <span class=\"customer-name\">{{ title }}</span>{{ field_testimonial_title }}\r\n      </div> <!-- .author-wrapper -->\r\n      {% if field_testimonial_company_name or field_testimonial_city or field_testimonial_state %}\r\n      <div class=\"company-wrapper\">\r\n        <span class=\"company-name\">{{ field_testimonial_company_name }}{% if field_testimonial_company_name %}{% if field_testimonial_city or field_testimonial_state %}</span>&nbsp;|&nbsp;{% endif %}{% endif %}\r\n        {% if field_testimonial_city or field_testimonial_state %}\r\n        <span class=\"city-state-wrapper\">\r\n          {{ field_testimonial_city }}{% if field_testimonial_city and field_testimonial_state %},&nbsp;{% endif %}{{ field_testimonial_state }}\r\n        </span>\r\n        {% endif %}\r\n      </div> <!-- .company-wrapper -->\r\n      {% endif %}\r\n    </div> <!-- .attribution-section -->\r\n  </div> <!-- .testimonial-wrapper --> \r\n  {% endif %}\r\n</div> <!-- .testimonials-wrapper-wrapper -->\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
         view_node:
           id: view_node
           table: node
@@ -3530,8 +4129,6 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
           label: ''
           exclude: false
           alter:
@@ -3576,41 +4173,8 @@ display:
           text: 'Read More'
           output_url_as_text: true
           absolute: false
-      pager:
-        type: full
-        options:
-          offset: 0
-          items_per_page: 10
-          total_pages: null
-          id: 0
-          tags:
-            next: ››
-            previous: ‹‹
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      defaults:
-        pager: false
-        use_more: false
-        use_more_always: false
-        use_more_text: false
-        fields: false
-        footer: false
-      display_description: ''
-      use_more: false
-      use_more_always: true
-      use_more_text: 'View All'
-      footer: {  }
-      display_extenders: {  }
-      path: testimonials
+          entity_type: node
+          plugin_id: entity_link
     cache_metadata:
       max-age: -1
       contexts:
