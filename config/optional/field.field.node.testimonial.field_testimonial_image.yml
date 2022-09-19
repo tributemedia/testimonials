@@ -10,13 +10,15 @@ id: node.testimonial.field_testimonial_image
 field_name: field_testimonial_image
 entity_type: node
 bundle: testimonial
-label: 'Testimonial Image'
+label: Image
 description: 'Upload an image to be displayed with this testimonial. Typically this image will be displayed as a thumbnail to the left of the text.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
+  handler: 'default:file'
+  handler_settings: {  }
   file_directory: testimonials
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
@@ -32,6 +34,4 @@ settings:
     title: ''
     width: null
     height: null
-  handler: 'default:file'
-  handler_settings: {  }
 field_type: image

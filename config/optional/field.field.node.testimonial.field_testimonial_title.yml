@@ -9,7 +9,7 @@ field_name: field_testimonial_title
 entity_type: node
 bundle: testimonial
 label: Title
-description: 'Enter the professional title of the person offering the testimonial.'
+description: ''
 required: false
 translatable: false
 default_value: {  }

@@ -1,10 +1,12 @@
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: UbPHdobULg8pzVD_KRIRrx4OTlSHM-urFKWKw34Gom8
 id: sb_slide_show
 name: sb_slide_show
-label: 'SB Slide Show'
 weight: 0
+label: 'SB Slide Show'
 group: ''
 skin: ''
 breakpoints: 4
@@ -30,8 +32,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -44,8 +46,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -58,8 +60,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -72,8 +74,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -81,4 +83,3 @@ options:
           swipe: false
           touchMove: false
           waitForAnimate: false
-

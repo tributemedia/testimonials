@@ -9,7 +9,7 @@ field_name: field_testimonial_city
 entity_type: node
 bundle: testimonial
 label: City
-description: 'Enter the city of the person or company offering the testimonial.'
+description: ''
 required: false
 translatable: false
 default_value: {  }
