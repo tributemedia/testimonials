@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: k-uVsotULE_kbsfbbDtLeQSfvR0Mz1K4_T-UmT5d8Ec
+  default_config_hash: pz5uP5cfztaCEqdsO2zmYvj3DXEWvrxOj6KbOuC2A80
 id: slide_show
 name: slide_show
 weight: 0
@@ -32,8 +32,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -46,8 +46,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -60,8 +60,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -74,8 +74,8 @@ options:
         unslick: false
         settings:
           autoplay: true
-          autoplaySpeed: 4000
           pauseOnFocus: false
+          autoplaySpeed: 4000
           arrows: false
           draggable: false
           rows: 0
@@ -83,4 +83,3 @@ options:
           swipe: false
           touchMove: false
           waitForAnimate: false
-

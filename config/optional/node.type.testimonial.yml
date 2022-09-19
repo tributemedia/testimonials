@@ -5,8 +5,9 @@ dependencies:
     - menu_ui
 third_party_settings:
   menu_ui:
-    available_menus: {  }
-    parent: ''
+    available_menus:
+      - main
+    parent: 'main:'
 name: Testimonial
 type: testimonial
 description: 'Use this content type to create new testimonials. They will automatically appear in their appropriate locations throughout your website.'

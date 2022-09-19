@@ -12,81 +12,89 @@ dependencies:
     - node.type.testimonial
   module:
     - field_group
-    - maxlength
     - path
     - svg_image
     - text
 third_party_settings:
   field_group:
+    group_form_details:
+      children:
+        - title
+      label: ''
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: '<p class="form-details">This testimonial content type will create a testimonial for your website. It should automatically appear based on your website''s configuration.</p>'
+        required_fields: false
     group_tabs:
       children:
         - group_image
         - group_content
         - group_additional_details
+      label: Tabs
+      region: content
       parent_name: ''
-      weight: 2
+      weight: 1
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         direction: horizontal
-      label: Tabs
+        width_breakpoint: 640
     group_image:
       children:
         - field_testimonial_image
+      label: Image
+      region: content
       parent_name: group_tabs
       weight: 20
       format_type: tab
       format_settings:
-        label: Image
+        classes: ''
+        show_empty_fields: false
+        id: ''
         formatter: closed
         description: ''
-        required_fields: true
-        id: ''
-        classes: ''
-      label: Image
+        required_fields: false
     group_content:
       children:
         - body
+      label: Content
+      region: content
       parent_name: group_tabs
       weight: 21
       format_type: tab
       format_settings:
-        label: Content
-        formatter: open
-        description: ''
-        required_fields: true
-        id: ''
         classes: ''
-      label: Content
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: false
     group_additional_details:
       children:
         - field_testimonial_title
         - field_testimonial_company_name
         - field_testimonial_city
         - field_testimonial_state
+      label: 'Additional Details'
+      region: content
       parent_name: group_tabs
       weight: 22
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         formatter: closed
         description: ''
-        required_fields: true
-      label: 'Additional Details'
-    group_form_details:
-      children:
-        - title
-      parent_name: ''
-      weight: 0
-      format_type: fieldset
-      format_settings:
-        id: ''
-        classes: ''
-        description: '<p class="form-details">This testimonial content type will create a testimonial for your website. It should automatically appear based on your website''s configuration.</p>'
         required_fields: false
-      label: ''
 id: node.testimonial.default
 targetEntityType: node
 bundle: testimonial
@@ -94,67 +102,60 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 22
+    weight: 10
+    region: content
     settings:
       rows: 9
-      placeholder: ''
       summary_rows: 3
-      show_summary: false
-    third_party_settings:
-      maxlength:
-        maxlength_js: 5000
-        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_summary: 150
-        maxlength_js_label_summary: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: false
-        maxlength_js_truncate_html: false
-    region: content
+      placeholder: ''
+      show_summary: true
+    third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_testimonial_city:
-    weight: 13
+    type: string_textfield
+    weight: 17
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_testimonial_company_name:
-    weight: 12
+    type: string_textfield
+    weight: 16
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_testimonial_image:
-    weight: 11
+    type: image_image
+    weight: 14
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
-    region: content
   field_testimonial_state:
-    weight: 14
+    type: string_textfield
+    weight: 18
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_testimonial_title:
-    weight: 11
+    type: string_textfield
+    weight: 15
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   path:
     type: path
     weight: 7
@@ -163,24 +164,29 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 4
+    region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 9
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 6
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -192,13 +198,13 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 2
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   url_redirects:
     weight: 8

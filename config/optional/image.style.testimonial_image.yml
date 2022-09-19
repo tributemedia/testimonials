@@ -4,8 +4,8 @@ dependencies: {  }
 name: testimonial_image
 label: 'Testimonial Image'
 effects:
-  4def7be9-2f51-4d01-ad9e-dfbadb616d26:
-    uuid: 4def7be9-2f51-4d01-ad9e-dfbadb616d26
+  f10db6a5-77c2-48cd-961b-e430ec499b4c:
+    uuid: f10db6a5-77c2-48cd-961b-e430ec499b4c
     id: image_scale_and_crop
     weight: 1
     data:

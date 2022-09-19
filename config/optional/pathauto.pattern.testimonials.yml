@@ -6,16 +6,16 @@ dependencies:
 id: testimonials
 label: Testimonials
 type: 'canonical_entities:node'
-pattern: 'testimonials/[node:title]'
+pattern: 'testimonial/[node:title]'
 selection_criteria:
-  54143cd6-8f1d-4249-ad9f-78af74c3cda0:
-    id: node_type
-    bundles:
-      testimonial: testimonial
+  bf67296a-660a-4c2b-9747-db6404465da0:
+    id: 'entity_bundle:node'
     negate: false
+    uuid: bf67296a-660a-4c2b-9747-db6404465da0
     context_mapping:
       node: node
-    uuid: 54143cd6-8f1d-4249-ad9f-78af74c3cda0
+    bundles:
+      testimonial: testimonial
 selection_logic: and
 weight: -5
 relationships: {  }

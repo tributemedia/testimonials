@@ -8,10 +8,8 @@ dependencies:
     - field.field.node.testimonial.field_testimonial_image
     - field.field.node.testimonial.field_testimonial_state
     - field.field.node.testimonial.field_testimonial_title
-    - image.style.testimonial_image
     - node.type.testimonial
   module:
-    - field_formatter_class
     - svg_image
     - text
     - user
@@ -21,62 +19,62 @@ bundle: testimonial
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 1
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 101
     region: content
   field_testimonial_city:
-    weight: 6
-    label: hidden
+    type: string
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 102
     region: content
   field_testimonial_company_name:
-    weight: 5
-    label: hidden
+    type: string
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 103
     region: content
   field_testimonial_image:
-    weight: 2
-    label: hidden
-    settings:
-      image_style: testimonial_image
-      image_link: ''
-      svg_render_as_image: '1'
-      svg_attributes:
-        width: ''
-        height: ''
-    third_party_settings:
-      field_formatter_class:
-        class: ''
     type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 105
     region: content
   field_testimonial_state:
-    weight: 4
-    label: hidden
+    type: string
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 104
     region: content
   field_testimonial_title:
-    weight: 3
-    label: hidden
+    type: string
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 106
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
 hidden: {  }

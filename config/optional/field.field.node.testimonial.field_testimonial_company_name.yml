@@ -9,7 +9,7 @@ field_name: field_testimonial_company_name
 entity_type: node
 bundle: testimonial
 label: 'Company Name'
-description: 'Enter the name of the company offering the testimonial.'
+description: ''
 required: false
 translatable: false
 default_value: {  }
