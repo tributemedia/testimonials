@@ -1,7 +1,7 @@
 name: Testimonial
 description: 'Provides Testimonial content type and related configuration. Use this content type to create new testimonials. They will automatically appear in their appropriate locations throughout your website.'
 type: module
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10
 dependencies:
   - adv_block_class
   - block
